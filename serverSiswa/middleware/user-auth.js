@@ -1,0 +1,18 @@
+const validApiKey = '12345'
+
+const  userAuth = (req,res,next) =>{
+    const apiKey = req.headers['x-api-key']
+
+    if(!apiKey){
+        res.status(400).json({message: 'Access Denied'})
+        return
+    }
+
+    if(apiKey != validApiKey){
+        res.status(400).json({message: 'Invalid Api Key'})
+        return
+    }
+    next()
+}
+
+module.exports = userAuth
